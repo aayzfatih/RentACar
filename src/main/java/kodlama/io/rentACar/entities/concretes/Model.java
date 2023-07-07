@@ -8,25 +8,22 @@ import lombok.Setter;
 
 import java.util.List;
 
-
-@Table(name = "brands")
-//@Data //Getter ve setterlari olusturuyor
-@Getter
-@Setter
+@Table(name = "models")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity
-public class Brand {
-    @Id//PK
+public class Model {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
     @Column(name = "name")
     private String name;
-
-    @OneToMany(mappedBy = "brand" )
-    private List<Model> models;
-
-
+    @ManyToOne
+    @JoinColumn(name ="brand_id")
+    private Brand brand;
+    @OneToMany(mappedBy = "model")
+    private List<Car>cars;
 }
